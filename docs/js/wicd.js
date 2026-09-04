@@ -97,6 +97,36 @@ document.addEventListener("DOMContentLoaded", function () {
   wireExit("menu-social", "exit-social");   // also fades the star its title covers
   wireExit("menu-marketing", null);
 
+  // ----- Coming back with the browser's Back button -----
+  // We leave for an inner page with .page-exit on <body>: artwork and
+  // buttons at opacity 0, planet off the left edge. Firefox and Safari
+  // restore this document from the back/forward cache exactly as it was
+  // left -- same classes, no second DOMContentLoaded -- so Back lands you
+  // on a black page with only the stars, which reads as "Back did nothing".
+  //
+  // pageshow fires on every display of the page, restored or not, so
+  // resetting here covers both. On a fresh load the reset is a no-op.
+  var freeze = document.createElement("style");
+  freeze.textContent =
+    "body.restoring, body.restoring * { transition: none !important; animation: none !important; }";
+
+  window.addEventListener("pageshow", function () {
+    document.head.appendChild(freeze);          // land instantly, don't replay the fade
+    document.body.classList.add("restoring");
+    document.body.classList.remove("page-exit", "exit-social");
+    scrollBeforeWicd = null;                    // so the close below doesn't scroll
+    setWicd(false, false);                      // the menu was open when we left
+    window.scrollTo(0, 0);
+    // two frames: one isn't enough for the browser to commit the reset, and
+    // the transitions would run anyway on the way out of .restoring
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        document.body.classList.remove("restoring");
+        if (freeze.parentNode) freeze.parentNode.removeChild(freeze);
+      });
+    });
+  });
+
   // ----- Escape backs out of whatever is open -----
   document.addEventListener("keydown", function (e) {
     if (e.key !== "Escape") return;
