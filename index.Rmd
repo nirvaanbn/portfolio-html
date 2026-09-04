@@ -1,0 +1,72 @@
+---
+pagetitle: Nirvaan Nair
+---
+
+```{=html}
+<!-- ============================================================
+     LANDING PAGE
+     The stage is a 16:9 canvas that scales with the window.
+     Every button is a transparent-PNG overlay placed at the exact
+     spot it occupies in the Canva design; hovering swaps in the
+     hover crop. Positions/sizes live in css/style.css.
+
+     ABOUT ME lives on this page as an overlay (see .about-panel
+     below), not as a separate file. Clicking About Me fades the
+     other buttons out, slides the stage left, then fades the text
+     in. Edit that text in the .about-copy block near the bottom.
+
+     LINKS TO UPDATE LATER:
+       - Marketing Campaign Development page: menu-marketing is "#"
+     ============================================================ -->
+<div class="stage">
+<!-- the artwork + name: fades away on the way to the Social Media page -->
+<div class="stage-bg"></div>
+<!-- stars stay put, the planet slides off; both are lifted out of the
+     background image by tools/build_assets.py so they can move alone -->
+<div class="layer-planet" aria-hidden="true"></div>
+<div class="layer-stars" aria-hidden="true"></div>
+<!-- the cluster the Social Media title would sit on: fades away with
+     everything else, so that page starts with clear space there -->
+<div class="layer-star-title" aria-hidden="true"></div>
+<a class="hotspot" id="btn-email" href="mailto:nirvaanbrandonnair@gmail.com" aria-label="Email nirvaanbrandonnair@gmail.com"></a>
+<a class="hotspot" id="btn-linkedin" href="https://www.linkedin.com/in/nirvaanb/" target="_blank" rel="noopener" aria-label="LinkedIn profile"></a>
+<a class="hotspot" id="btn-about" href="#about" aria-label="About Me" aria-expanded="false"></a>
+<a class="hotspot" id="btn-resume" href="https://docs.google.com/document/d/1BuHe2JNfqPQ_-LlZUUDF_ZoVKEKmPYj0OKOq9jnPOgY" target="_blank" rel="noopener" aria-label="Resume"></a>
+<button class="hotspot" id="btn-wicd" type="button" aria-haspopup="true" aria-expanded="false" aria-label="What I Can Do"></button>
+<div id="wicd-window" hidden>
+  <button class="hotspot" id="wicd-close" type="button" aria-label="Close menu"></button>
+  <a class="hotspot" id="menu-social" href="social-media.html" aria-label="Social Media and Content Creation"></a>
+  <a class="hotspot" id="menu-marketing" href="marketing.html" aria-label="Marketing Campaign Development"></a>
+  <a class="hotspot" id="menu-data" href="https://nirvaanbn.github.io/r-portfolio/" target="_blank" rel="noopener" aria-label="Data Analysis and Visualization"></a>
+</div>
+<div class="preload" aria-hidden="true"></div>
+</div>
+
+<!-- ============================================================
+     ABOUT ME PANEL — right half of the screen.
+     Everything below is plain HTML: edit the paragraphs freely.
+     ============================================================ -->
+<section class="about-panel" id="about-panel" aria-hidden="true" aria-labelledby="about-title">
+<div class="about-inner">
+<button class="about-close" id="about-close" type="button" aria-label="Close About Me"></button>
+<h1 class="about-title" id="about-title">About Me</h1>
+
+<!-- To add a portrait: put the file in assets/ and uncomment this line.
+<img class="about-photo" src="assets/about-portrait.jpg" alt="Nirvaan Nair">
+-->
+
+<div class="about-copy">
+<p>Hi, I&rsquo;m Nirvaan! I&rsquo;m from San Francisco and grew up in the Bay Area. My background was originally in education with an emphasis on teaching strategies for children on the Autism spectrum, an experience that deeply shaped how I think about communication.</p>
+
+<p>While preparing for a future in education, I took a class called Intercultural Communication at community college. Throughout the class and several others, <strong>I realized that I could turn my personal interests, such as celebrity/influencer culture, social media, and public speaking, into a real career. In the process, I discovered a genuine passion for communications.</strong></p>
+
+<p>The very next quarter, I started applying to four-year universities for a degree in Communication.</p>
+
+<p><strong>My years spent in special education and teaching have given me a well-rounded set of tools for Communications.</strong> One such tool has been the ability to intimately connect with an audience by deeply understanding their needs. This was a requirement for connecting with students and showing them the value in what they were learning. This skill set translates directly to relationship management on the B2C level.</p>
+
+<p>Today, I am in my last quarter attending UC Davis for a bachelor&rsquo;s in Communication (with a minor in Data in Society). I am the president of two student organizations and the communications coordinator for the UC Davis AI Game and Governance Lab, which researches AI development and policy. I&rsquo;ve also just completed both a Marketing/PR internship and an Amazon Data Analytics &amp; Optimization internship over the summer of 2026.</p>
+</div>
+</div>
+</section>
+<script src="js/wicd.js"></script>
+```

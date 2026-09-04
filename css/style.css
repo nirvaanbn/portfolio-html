@@ -1,0 +1,401 @@
+/* ============================================================
+   Nirvaan Nair — portfolio stylesheet
+   Design canvas: 1920 x 1080. Buttons are positioned with
+   percentages of that canvas so the layout scales with the
+   window. Original pixel rects are noted beside each rule in
+   case you re-export an asset and need to re-measure.
+   ============================================================ */
+
+/* ---------- page basics ---------- */
+:root {
+  --font-serif: "Times New Roman", Times, serif;
+  /* Agrandir is the design's display face. Drop Agrandir-Regular.woff2 into
+     assets/fonts/ and uncomment the @font-face block below to get it exactly;
+     until then these geometric sans fallbacks stand in for it. */
+  --font-agrandir: "Agrandir", "Century Gothic", "Futura", "Avenir Next",
+                   "Trebuchet MS", sans-serif;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: #160c0f;
+  font-family: var(--font-serif);
+}
+
+/* Future HTML-text buttons / headings in the menu style:
+   drop Agrandir files into assets/fonts/ and uncomment.
+@font-face {
+  font-family: "Agrandir";
+  src: url("../assets/fonts/Agrandir-Regular.woff2") format("woff2");
+}
+.agrandir { font-family: "Agrandir", "Poppins", Arial, sans-serif; text-transform: uppercase; }
+*/
+
+/* Neutralize R Markdown's default 940px container */
+.main-container {
+  max-width: none !important;
+  width: 100%;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+/* The landing stage spans the full browser width and keeps its 16:9 shape.
+   Nothing is ever cropped: if the window is too short for the full height,
+   the page simply scrolls. It stays vertically centred when it does fit. */
+.main-container:has(.stage) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+/* ---------- the 16:9 stage (landing page) ---------- */
+.stage {
+  position: relative;
+  flex: none;
+  width: 100%; /* 100% not 100vw, so a scrollbar can't cause sideways scroll */
+  aspect-ratio: 16 / 9;
+  background: #160c0f;
+}
+/* The photo, the ascii rock and the name. Held apart from the stars and the
+   planet so the Social Media transition can fade this away while those two
+   behave differently. */
+.stage-bg {
+  position: absolute;
+  inset: 0;
+  background: url("../assets/bg-home.png") center / 100% 100% no-repeat;
+}
+/* cut out of the background by tools/build_assets.py */
+.layer-stars,
+.layer-star-title,
+.layer-planet {
+  position: absolute;
+  pointer-events: none;
+  background: center / 100% 100% no-repeat;
+}
+.layer-stars {
+  inset: 0;
+  background-image: url("../assets/layer-stars.png");
+}
+.layer-star-title { /* rect (246,66) 76x76 */
+  left: 12.8125%; top: 6.1111%; width: 3.9583%; height: 7.0370%;
+  background-image: url("../assets/layer-star-title.png");
+}
+.layer-planet { /* rect (0,110) 268x238 */
+  left: 0; top: 10.1852%; width: 13.9583%; height: 22.0370%;
+  background-image: url("../assets/layer-planet.png");
+}
+.stage p { margin: 0; } /* pandoc sometimes wraps inline HTML in <p> */
+
+/* ---------- the name, as its own layer over the bg ----------
+   High-res ascii-dissolve art (assets/title-line*.png); the baked title
+   was erased from bg-home.png so this version can pop. */
+.stage-bg::before,
+.stage-bg::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  background: center / 100% 100% no-repeat;
+}
+.stage-bg::before { /* NIRVAAN */
+  left: 35.0695%; top: 2.1152%; width: 30.1615%; height: 8.4417%;
+  background-image: url("../assets/title-line1.png");
+}
+.stage-bg::after { /* NAIR */
+  left: 41.1689%; top: 14.2650%; width: 15.6492%; height: 7.7829%;
+  background-image: url("../assets/title-line2.png");
+}
+
+/* ---------- hotspot = image button overlay ---------- */
+.hotspot {
+  position: absolute;
+  display: block;
+  padding: 0;
+  border: 0;
+  background-color: transparent;
+  background-position: center;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+.hotspot:focus-visible {
+  outline: 2px solid #f2ecd8;
+  outline-offset: 2px;
+}
+[hidden] { display: none !important; }
+
+/* email — rect (376,185) 336x75 */
+#btn-email {
+  left: 19.5833%; top: 17.1296%; width: 17.5%; height: 6.9444%;
+  background-image: url("../assets/btn-email.png");
+}
+#btn-email:hover,
+#btn-email:focus-visible { background-image: url("../assets/btn-email-hover.png"); }
+
+/* linkedin — rect (1231,192) 89x77 */
+#btn-linkedin {
+  left: 64.1146%; top: 17.7778%; width: 4.6354%; height: 7.1296%;
+  background-image: url("../assets/btn-linkedin.png");
+}
+#btn-linkedin:hover,
+#btn-linkedin:focus-visible { background-image: url("../assets/btn-linkedin-hover.png"); }
+
+/* about me — rect (481,428) 186x53 */
+#btn-about {
+  left: 25.0521%; top: 39.6296%; width: 9.6875%; height: 4.9074%;
+  background-image: url("../assets/btn-about.png");
+}
+#btn-about:hover,
+#btn-about:focus-visible { background-image: url("../assets/btn-about-hover.png"); }
+
+/* resume — rect (1254,428) 185x53 */
+#btn-resume {
+  left: 65.3125%; top: 39.6296%; width: 9.6354%; height: 4.9074%;
+  background-image: url("../assets/btn-resume.png");
+}
+#btn-resume:hover,
+#btn-resume:focus-visible { background-image: url("../assets/btn-resume-hover.png"); }
+
+/* WHAT I CAN DO bar — rect (604,582) 673x70 */
+#btn-wicd {
+  left: 31.4583%; top: 53.8889%; width: 35.0521%; height: 6.4815%;
+  background-image: url("../assets/btn-wicd.png");
+}
+#btn-wicd:hover,
+#btn-wicd:focus-visible { background-image: url("../assets/btn-wicd-hover.png"); }
+
+/* ---------- WICD popup window — rect (711,582) 498x498 ---------- */
+#wicd-window {
+  position: absolute;
+  left: 37.0312%; top: 53.8889%; width: 25.9375%; height: 46.1111%;
+  background: url("../assets/wicd-window.png") center / 100% 100% no-repeat;
+}
+/* hotspots below are % of the WINDOW, not the stage */
+#wicd-close { /* the X in the title bar */
+  left: 89.5582%; top: 1.6064%; width: 6.6265%; height: 6.6265%;
+}
+#menu-social {
+  left: 17.4699%; top: 15.4618%; width: 65.0602%; height: 17.6707%;
+}
+#menu-social:hover,
+#menu-social:focus-visible { background-image: url("../assets/btn-menu-social-hover.png"); }
+#menu-marketing {
+  left: 17.4699%; top: 45.1807%; width: 65.0602%; height: 17.4699%;
+}
+#menu-marketing:hover,
+#menu-marketing:focus-visible { background-image: url("../assets/btn-menu-marketing-hover.png"); }
+#menu-data {
+  left: 17.4699%; top: 74.6988%; width: 65.0602%; height: 17.6707%;
+}
+#menu-data:hover,
+#menu-data:focus-visible { background-image: url("../assets/btn-menu-data-hover.png"); }
+
+/* fetch hover images up front so the first hover doesn't flicker */
+.preload {
+  position: absolute;
+  width: 1px; height: 1px;
+  left: -10px; top: -10px;
+  visibility: hidden;
+  background-image:
+    url("../assets/btn-email-hover.png"),
+    url("../assets/btn-linkedin-hover.png"),
+    url("../assets/btn-about-hover.png"),
+    url("../assets/btn-resume-hover.png"),
+    url("../assets/btn-wicd-hover.png"),
+    url("../assets/wicd-window.png"),
+    url("../assets/btn-menu-social-hover.png"),
+    url("../assets/btn-menu-marketing-hover.png"),
+    url("../assets/btn-menu-data-hover.png"),
+    url("../assets/btn-close.png");
+}
+
+/* ---------- inner pages (Social Media etc.) ---------- */
+.page {
+  min-height: 100vh;
+  box-sizing: border-box;
+  /* 55px from the top at full 1920 width */
+  padding: calc(100vw * 55 / 1920) 6vw 6vh;
+  background: url("../assets/bg-page.png") center / cover no-repeat fixed #160c0f;
+}
+.page-title {
+  margin: 0;
+  text-align: center;
+  color: #ffffff;
+  font-family: "Times New Roman", Times, serif;
+  font-weight: 400;
+  /* 70pt in the Canva design = ~93px on the 1920 canvas */
+  font-size: clamp(34px, 4.8611vw, 120px);
+  line-height: 1.4;
+}
+.page-content {
+  max-width: 900px;
+  margin: 6vh auto 0;
+  color: #f1ede4;
+  font-size: clamp(16px, 1.35vw, 26px);
+  line-height: 1.6;
+}
+
+/* ============================================================
+   ABOUT ME overlay (landing page)
+   Clicking About Me plays a three-step sequence, driven purely by
+   CSS transitions on body.about-open:
+     open:  buttons fade out (0-.35s) -> stage slides left
+            (.3-1.2s) -> text fades in (1.25-1.75s)
+     close: text fades out (0-.3s) -> stage slides back
+            (.25-1.15s) -> buttons fade in (1.15-1.5s)
+   The stage slides 376px of the 1920 canvas (19.5833%): the N of
+   NIRVAAN lands on the star cluster next to the planet (x~250-320)
+   and the car photo (x574-1347) stays fully on screen at x198-971.
+   ============================================================ */
+.stage {
+  transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1) 0.25s;
+}
+body.about-open .stage {
+  transform: translateX(-19.5833%);
+  transition-delay: 0.3s;
+}
+
+/* these three fade away while About Me is open (email + linkedin stay) */
+#btn-about,
+#btn-resume,
+#btn-wicd {
+  transition: opacity 0.35s ease 1.15s, visibility 0s linear 1.15s;
+}
+body.about-open #btn-about,
+body.about-open #btn-resume,
+body.about-open #btn-wicd {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.35s ease, visibility 0s linear 0.35s;
+}
+
+/* ---------- the text panel, right of the divider ---------- */
+.about-panel {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 51.5%;   /* the car photo's right edge sits at 50.57% once slid */
+  right: 2.75%;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  border-left: 2px solid rgba(241, 237, 228, 0.45); /* the divider */
+  /* near-opaque page colour: dulls whatever slides underneath (the blue
+     ascii rock especially) so the text stays legible */
+  background: rgba(22, 12, 15, 0.95);
+  padding: 3vh 2vw;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0s linear 0.3s;
+}
+body.about-open .about-panel {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.5s ease 1.25s, visibility 0s linear 1.25s;
+}
+/* the panel is a sibling of .stage inside the flex main-container */
+.main-container:has(.stage) { position: relative; }
+
+/* the inner column is narrower than the panel and centred in it, so the
+   text sits tucked and even instead of stretching to the right edge;
+   margin:auto centring degrades to a normal scroll when text is tall */
+.about-inner {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  width: min(100%, 34vw);
+  margin: auto;
+}
+
+.about-close { /* same X as the WICD window, cropped from its title bar */
+  align-self: flex-end;
+  flex: none;
+  width: clamp(22px, 1.46vw, 34px);
+  aspect-ratio: 28 / 29;
+  padding: 0;
+  border: 0;
+  cursor: pointer;
+  background: url("../assets/btn-close.png") center / 100% 100% no-repeat;
+}
+.about-close:hover,
+.about-close:focus-visible { filter: brightness(1.15); }
+
+.about-title {
+  margin: 0 0 4vh; /* a blank line or two before the text starts */
+  color: #ffffff;
+  font-family: "Times New Roman", Times, serif;
+  font-weight: 400;
+  font-size: clamp(28px, 3.2vw, 62px);
+  line-height: 1.15;
+}
+.about-copy {
+  overflow-y: auto;
+  min-height: 0;
+  color: #f1ede4;
+  font-family: "Times New Roman", Times, serif;
+  font-size: clamp(17px, 1.1vw, 21px); /* ~14pt at laptop widths */
+  line-height: 1.55;
+}
+.about-copy p { margin: 0 0 0.9em; }
+/* the copy scrolls inside the panel when it outgrows the window, so the
+   title and X stay put; keep that scrollbar visible but understated */
+.about-copy { scrollbar-width: thin; scrollbar-color: rgba(241,237,228,0.35) transparent; }
+.about-copy::-webkit-scrollbar { width: 8px; }
+.about-copy::-webkit-scrollbar-track { background: transparent; }
+.about-copy::-webkit-scrollbar-thumb {
+  background: rgba(241, 237, 228, 0.3);
+  border-radius: 4px;
+}
+.about-copy::-webkit-scrollbar-thumb:hover { background: rgba(241, 237, 228, 0.5); }
+
+/* respect a reduced-motion preference: show/hide with no slide or fade */
+@media (prefers-reduced-motion: reduce) {
+  .stage, .about-panel, #btn-about, #btn-resume, #btn-wicd { transition: none !important; }
+}
+.about-photo {
+  max-width: 40%;
+  float: right;
+  margin: 0 0 1em 1.2em;
+}
+
+/* ============================================================
+   SOCIAL MEDIA transition (landing page -> social-media.html)
+   Clicking the menu's Social Media button plays one 0.9s beat,
+   everything starting together:
+     - the artwork, the name and every button fade out (0.35s,
+       the same rate as the About Me fade)
+     - the planet slides off the left edge (0.9s, the same rate
+       and curve as the About Me slide)
+     - the stars do neither: they stay exactly where they are,
+       and the social page draws them at identical coordinates,
+       so the page swap underneath is invisible.
+   js/wicd.js navigates once the beat finishes.
+   ============================================================ */
+body.page-exit .stage-bg,
+body.page-exit #wicd-window,
+body.page-exit .hotspot,
+body.page-exit #btn-about,
+body.page-exit #btn-resume,
+body.page-exit #btn-wicd {
+  opacity: 0;
+  /* the ID-qualified selectors above exist to outrank the About Me
+     rules, which would otherwise hold these buttons at a 1.15s delay */
+  transition: opacity 0.35s ease, visibility 0s linear 0.35s;
+}
+.layer-planet {
+  transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+}
+body.page-exit .layer-planet {
+  transform: translateX(-130%);
+}
+/* Only the Social Media page needs this cluster gone: its title sits there.
+   The Marketing page draws the star, so it stays put on the way over. */
+body.page-exit.exit-social .layer-star-title {
+  opacity: 0;
+  transition: opacity 0.35s ease, visibility 0s linear 0.35s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .layer-planet { transition: none !important; }
+}

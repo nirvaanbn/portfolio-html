@@ -1,0 +1,16 @@
+# R / RStudio
+.Rproj.user/
+.Rhistory
+.RData
+.Ruserdata
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Local tooling (the dev-server config; harmless to commit, ignored by default)
+.claude/
+
+# NOTE: do NOT ignore docs/.
+# It is the built site, and GitHub Pages serves it straight from the branch.
+# Ignoring it is the usual reason a Pages deploy comes up blank.

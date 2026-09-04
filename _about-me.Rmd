@@ -1,0 +1,31 @@
+---
+pagetitle: About Me — Nirvaan Nair
+---
+
+```{=html}
+<!-- ============================================================
+     ABOUT ME
+     Title is real HTML text (Times New Roman, ~70pt at full size)
+     so it stays easy to edit. Add your body text inside
+     .page-content below — plain HTML, styled by css/style.css.
+     ============================================================ -->
+<div class="page">
+<h1 class="page-title">About Me</h1>
+<div class="page-content">
+<!
+<p>Hi, I’m Nirvaan! I’m from San Francisco and grew up in the Bay Area. My background was originally in education with an emphasis on teaching strategies for children on the Autism spectrum, an experience that deeply shaped how I think about communication. 
+.</p>
+
+<p>While preparing for a future in education, I took a class called Intercultural Communication at community college. Throughout the class and several others, *I realized that I could turn my personal interests, such as celebrity/influencer culture, social media, and public speaking, into a real career. In the process, I discovered a genuine passion for communications.*</p>
+
+<p>The very next quarter, I started applying to four-year universities for a degree in Communication. 
+<p>
+
+<p>*My years spent in special education and teaching have given me a well-rounded set of tools for Communications.* One such tool has been the ability to intimately connect with an audience by deeply understanding their needs. This was a requirement for connecting with students and showing them the value in what they were learning. This skill set translates directly to relationship management on the B2C level.<p>
+
+<p>Today, I am in my last quarter attending UC Davis for a bachelor’s in Communication (with a minor in Data in Society). I am the president of two student organizations and the communications coordinator for the UC Davis AI Game and Governance Lab, which researches AI development and policy. I’ve also just completed both a Marketing/PR internship and an Amazon Data Analytics & Optimization internship over the summer of 2026.
+<p>
+
+</div>
+</div>
+```

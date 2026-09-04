@@ -1,0 +1,15 @@
+name: "nirvaan-nair-portfolio"
+output_dir: "docs"
+# Source material and tooling: kept in the repo, never published to docs/
+exclude: ["Pages for Portfolio", "README.md", "notes", "tools"]
+output:
+  html_document:
+    theme: null
+    highlight: null
+    mathjax: null
+    self_contained: false
+    css:
+      - css/style.css
+      - css/social-layout.css
+      - css/social.css
+      - css/marketing-layout.css
