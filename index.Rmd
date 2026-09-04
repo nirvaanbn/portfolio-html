@@ -3,30 +3,10 @@ pagetitle: Nirvaan Nair
 ---
 
 ```{=html}
-<!-- ============================================================
-     LANDING PAGE
-     The stage is a 16:9 canvas that scales with the window.
-     Every button is a transparent-PNG overlay placed at the exact
-     spot it occupies in the Canva design; hovering swaps in the
-     hover crop. Positions/sizes live in css/style.css.
-
-     ABOUT ME lives on this page as an overlay (see .about-panel
-     below), not as a separate file. Clicking About Me fades the
-     other buttons out, slides the stage left, then fades the text
-     in. Edit that text in the .about-copy block near the bottom.
-
-     LINKS TO UPDATE LATER:
-       - Marketing Campaign Development page: menu-marketing is "#"
-     ============================================================ -->
 <div class="stage">
-<!-- the artwork + name: fades away on the way to the Social Media page -->
 <div class="stage-bg"></div>
-<!-- stars stay put, the planet slides off; both are lifted out of the
-     background image by tools/build_assets.py so they can move alone -->
 <div class="layer-planet" aria-hidden="true"></div>
 <div class="layer-stars" aria-hidden="true"></div>
-<!-- the cluster the Social Media title would sit on: fades away with
-     everything else, so that page starts with clear space there -->
 <div class="layer-star-title" aria-hidden="true"></div>
 <a class="hotspot" id="btn-email" href="mailto:nirvaanbrandonnair@gmail.com" aria-label="Email nirvaanbrandonnair@gmail.com"></a>
 <a class="hotspot" id="btn-linkedin" href="https://www.linkedin.com/in/nirvaanb/" target="_blank" rel="noopener" aria-label="LinkedIn profile"></a>
@@ -42,10 +22,6 @@ pagetitle: Nirvaan Nair
 <div class="preload" aria-hidden="true"></div>
 </div>
 
-<!-- ============================================================
-     ABOUT ME PANEL — right half of the screen.
-     Everything below is plain HTML: edit the paragraphs freely.
-     ============================================================ -->
 <section class="about-panel" id="about-panel" aria-hidden="true" aria-labelledby="about-title">
 <div class="about-inner">
 <button class="about-close" id="about-close" type="button" aria-label="Close About Me"></button>

@@ -9,13 +9,11 @@
   aspect-ratio: 1920 / 1080;
   margin: 0 auto;
   overflow: hidden;
-  /* the stars sit exactly where the landing page leaves them, so the
-     hand-off after the fade-out is invisible */
+  /* stars match the landing page, so the hand-off lines up */
   background: url("../assets/layer-stars.png") top left / 100% auto no-repeat #160c0f;
 }
 .mkt-stage > * { position: absolute; margin: 0; }
 
-/* the star the landing page keeps on screen, drawn here so it does not move */
 .mkt-star { left: 12.8125%; top: 6.1111%; width: 3.9583%; height: 7.0370%;
              background: url("../assets/layer-star-title.png") center / 100% 100% no-repeat; }
 
@@ -29,8 +27,7 @@
           background-image: url("../assets/mkt-flag.png"); }
 
 /* ---------- title ---------- */
-/* left-aligned rather than centred: the mockup sets it off to the left so
-   the flag can sit at the end of the word DEVELOPMENT */
+/* left-aligned: the flag sits at the end of the line */
 .mkt-title {
   left: 25.3646%; top: 8.3916%;   /* 0.1755em = Times cap-top offset at line-height 1 */
   white-space: nowrap;
@@ -40,9 +37,6 @@
 }
 
 /* ---------- copy boxes ---------- */
-/* drawn in CSS rather than as images so the text stays editable and wraps.
-   Padding is even on all four sides and the block is centred vertically, so
-   the copy sits in the middle of the box rather than hugging an edge. */
 .mkt-box {
   box-sizing: border-box;
   background: #f5ebce;
@@ -55,8 +49,6 @@
 }
 .mkt-box p { margin: 0 0 1.2727em; }
 .mkt-box p:last-child { margin-bottom: 0; }
-/* Canva tracked the two boxes differently; these keep each box wrapping
-   on sensible words and filling its height. */
 .mkt-box1 { letter-spacing: 0; }
 .mkt-box2 { letter-spacing: 0; }
 .mkt-box1 { left: 5.5729%; top: 21.0185%; width: 36.8750%; }
@@ -86,10 +78,7 @@
            transition: filter 0.2s ease, transform 0.2s ease; }
 .mkt-pin:hover, .mkt-pin:focus-visible { filter: brightness(1.15); transform: scale(1.08); }
 
-/* ============================================================
-   Entrance. The mountains and title come up alone first; about a
-   second later everything else fades in together; the pin lands last.
-   ============================================================ */
+/* ---------- entrance ---------- */
 @keyframes mkt-in { from { opacity: 0; } to { opacity: 1; } }
 /* beat 1: the header -- mountains, title and flag together */
 .mkt-stage .mkt-art, .mkt-stage .mkt-title { animation: mkt-in 1.2s ease both; }
@@ -98,9 +87,7 @@
   animation: mkt-in 0.9s ease 1.0s both;
 }
 
-/* beat 3: the pin springs up from its own point. fill-mode is backwards,
-   not both, so once it settles the element returns to its normal styles
-   and the hover transform still works. */
+/* beat 3: the pin. fill-mode backwards so hover still works after */
 @keyframes mkt-pin-pop {
   0%   { opacity: 0; transform: translateY(-45%) scale(0.4); }
   55%  { opacity: 1; transform: translateY(0) scale(1.18); }

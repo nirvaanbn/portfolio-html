@@ -1,16 +1,9 @@
-// Landing-page interactions: the "WHAT I CAN DO" window and the
-// About Me slide-over. All animation lives in css/style.css; this
-// file only toggles classes/attributes and manages focus.
 document.addEventListener("DOMContentLoaded", function () {
-  // ----- WHAT I CAN DO window -----
   var wicdBtn = document.getElementById("btn-wicd");
   var wicdWin = document.getElementById("wicd-window");
   var wicdClose = document.getElementById("wicd-close");
   var scrollBeforeWicd = null;
 
-  // Most browser windows are wider than 16:9, so the stage's bottom -- and
-  // with it the menu's third button -- sits below the fold. Opening the menu
-  // scrolls down to reveal it; closing returns you where you were.
   function scrollPageTo(top) {
     var still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     window.scrollTo({ top: top, behavior: still ? "auto" : "smooth" });
@@ -28,9 +21,8 @@ document.addEventListener("DOMContentLoaded", function () {
       scrollPageTo(scrollBeforeWicd);
       scrollBeforeWicd = null;
     }
-    // preventScroll: focusing would otherwise yank the page back up and
-    // fight the smooth scroll we just started
     if (moveFocus !== false) {
+      // preventScroll, or focusing undoes the scroll we just started
       (open ? wicdClose : wicdBtn).focus({ preventScroll: true });
     }
   }
@@ -40,7 +32,6 @@ document.addEventListener("DOMContentLoaded", function () {
     wicdClose.addEventListener("click", function () { setWicd(false); });
   }
 
-  // ----- About Me slide-over -----
   var aboutBtn = document.getElementById("btn-about");
   var aboutPanel = document.getElementById("about-panel");
   var aboutClose = document.getElementById("about-close");
@@ -51,11 +42,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function setAbout(open) {
     if (!aboutBtn || !aboutPanel) return;
-    if (open && !wicdWin.hidden) setWicd(false, false); // tidy up first
+    if (open && !wicdWin.hidden) setWicd(false, false);
     document.body.classList.toggle("about-open", open);
     aboutBtn.setAttribute("aria-expanded", open ? "true" : "false");
     aboutPanel.setAttribute("aria-hidden", open ? "false" : "true");
-    // focus targets only become focusable once their fade finishes
     window.setTimeout(function () {
       if (open === aboutIsOpen()) (open ? aboutClose : aboutBtn).focus({ preventScroll: true });
     }, open ? 1300 : 1200);
@@ -69,16 +59,10 @@ document.addEventListener("DOMContentLoaded", function () {
     aboutClose.addEventListener("click", function () { setAbout(false); });
   }
 
-  // ----- Menu pages: play the exit beat, then navigate -----
-  // The stars are drawn at identical coordinates on the next page, so once
-  // the artwork has faded and the planet has slid away, swapping documents
-  // is invisible. Scrolling back to the top matters: opening the menu
-  // scrolled us down, and the next page starts at the top.
   function wireExit(linkId, extraClass) {
     var link = document.getElementById(linkId);
     if (!link) return;
     link.addEventListener("click", function (e) {
-      // let ctrl/cmd/middle-click open a new tab the normal way
       if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
       var href = link.getAttribute("href");
       if (!href || href === "#") return;
@@ -87,38 +71,31 @@ document.addEventListener("DOMContentLoaded", function () {
         window.location.href = href;
         return;
       }
-      scrollBeforeWicd = null;               // don't let the close handler fight it
+      scrollBeforeWicd = null;
       scrollPageTo(0);
       document.body.classList.add("page-exit");
       if (extraClass) document.body.classList.add(extraClass);
       window.setTimeout(function () { window.location.href = href; }, 900);
     });
   }
-  wireExit("menu-social", "exit-social");   // also fades the star its title covers
+  wireExit("menu-social", "exit-social");
   wireExit("menu-marketing", null);
 
-  // ----- Coming back with the browser's Back button -----
-  // We leave for an inner page with .page-exit on <body>: artwork and
-  // buttons at opacity 0, planet off the left edge. Firefox and Safari
-  // restore this document from the back/forward cache exactly as it was
-  // left -- same classes, no second DOMContentLoaded -- so Back lands you
-  // on a black page with only the stars, which reads as "Back did nothing".
-  //
-  // pageshow fires on every display of the page, restored or not, so
-  // resetting here covers both. On a fresh load the reset is a no-op.
+  // We leave with .page-exit on <body>, and the back/forward cache restores the
+  // page exactly as it was left, so Back would land on a faded-out page. Reset
+  // here instead: pageshow fires whether the page was restored or freshly
+  // loaded, and on a fresh load this is a no-op.
   var freeze = document.createElement("style");
   freeze.textContent =
     "body.restoring, body.restoring * { transition: none !important; animation: none !important; }";
 
   window.addEventListener("pageshow", function () {
-    document.head.appendChild(freeze);          // land instantly, don't replay the fade
+    document.head.appendChild(freeze);
     document.body.classList.add("restoring");
     document.body.classList.remove("page-exit", "exit-social");
-    scrollBeforeWicd = null;                    // so the close below doesn't scroll
-    setWicd(false, false);                      // the menu was open when we left
+    scrollBeforeWicd = null;
+    setWicd(false, false);
     window.scrollTo(0, 0);
-    // two frames: one isn't enough for the browser to commit the reset, and
-    // the transitions would run anyway on the way out of .restoring
     requestAnimationFrame(function () {
       requestAnimationFrame(function () {
         document.body.classList.remove("restoring");
@@ -127,7 +104,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // ----- Escape backs out of whatever is open -----
   document.addEventListener("keydown", function (e) {
     if (e.key !== "Escape") return;
     if (aboutIsOpen()) setAbout(false);

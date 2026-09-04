@@ -1,17 +1,9 @@
-/* ============================================================
-   Nirvaan Nair — portfolio stylesheet
-   Design canvas: 1920 x 1080. Buttons are positioned with
-   percentages of that canvas so the layout scales with the
-   window. Original pixel rects are noted beside each rule in
-   case you re-export an asset and need to re-measure.
-   ============================================================ */
+
 
 /* ---------- page basics ---------- */
 :root {
   --font-serif: "Times New Roman", Times, serif;
-  /* Agrandir is the design's display face. Drop Agrandir-Regular.woff2 into
-     assets/fonts/ and uncomment the @font-face block below to get it exactly;
-     until then these geometric sans fallbacks stand in for it. */
+
   --font-agrandir: "Agrandir", "Century Gothic", "Futura", "Avenir Next",
                    "Trebuchet MS", sans-serif;
 }
@@ -24,15 +16,6 @@ body {
   font-family: var(--font-serif);
 }
 
-/* Future HTML-text buttons / headings in the menu style:
-   drop Agrandir files into assets/fonts/ and uncomment.
-@font-face {
-  font-family: "Agrandir";
-  src: url("../assets/fonts/Agrandir-Regular.woff2") format("woff2");
-}
-.agrandir { font-family: "Agrandir", "Poppins", Arial, sans-serif; text-transform: uppercase; }
-*/
-
 /* Neutralize R Markdown's default 940px container */
 .main-container {
   max-width: none !important;
@@ -40,9 +23,7 @@ body {
   margin: 0 !important;
   padding: 0 !important;
 }
-/* The landing stage spans the full browser width and keeps its 16:9 shape.
-   Nothing is ever cropped: if the window is too short for the full height,
-   the page simply scrolls. It stays vertically centred when it does fit. */
+
 .main-container:has(.stage) {
   display: flex;
   align-items: center;
@@ -54,19 +35,17 @@ body {
 .stage {
   position: relative;
   flex: none;
-  width: 100%; /* 100% not 100vw, so a scrollbar can't cause sideways scroll */
+  width: 100%;
   aspect-ratio: 16 / 9;
   background: #160c0f;
 }
-/* The photo, the ascii rock and the name. Held apart from the stars and the
-   planet so the Social Media transition can fade this away while those two
-   behave differently. */
+
 .stage-bg {
   position: absolute;
   inset: 0;
   background: url("../assets/bg-home.png") center / 100% 100% no-repeat;
 }
-/* cut out of the background by tools/build_assets.py */
+
 .layer-stars,
 .layer-star-title,
 .layer-planet {
@@ -88,9 +67,6 @@ body {
 }
 .stage p { margin: 0; } /* pandoc sometimes wraps inline HTML in <p> */
 
-/* ---------- the name, as its own layer over the bg ----------
-   High-res ascii-dissolve art (assets/title-line*.png); the baked title
-   was erased from bg-home.png so this version can pop. */
 .stage-bg::before,
 .stage-bg::after {
   content: "";
@@ -157,7 +133,6 @@ body {
 #btn-resume:hover,
 #btn-resume:focus-visible { background-image: url("../assets/btn-resume-hover.png"); }
 
-/* WHAT I CAN DO bar — rect (604,582) 673x70 */
 #btn-wicd {
   left: 31.4583%; top: 53.8889%; width: 35.0521%; height: 6.4815%;
   background-image: url("../assets/btn-wicd.png");
@@ -171,7 +146,7 @@ body {
   left: 37.0312%; top: 53.8889%; width: 25.9375%; height: 46.1111%;
   background: url("../assets/wicd-window.png") center / 100% 100% no-repeat;
 }
-/* hotspots below are % of the WINDOW, not the stage */
+
 #wicd-close { /* the X in the title bar */
   left: 89.5582%; top: 1.6064%; width: 6.6265%; height: 6.6265%;
 }
@@ -191,7 +166,6 @@ body {
 #menu-data:hover,
 #menu-data:focus-visible { background-image: url("../assets/btn-menu-data-hover.png"); }
 
-/* fetch hover images up front so the first hover doesn't flicker */
 .preload {
   position: absolute;
   width: 1px; height: 1px;
@@ -224,7 +198,7 @@ body {
   color: #ffffff;
   font-family: "Times New Roman", Times, serif;
   font-weight: 400;
-  /* 70pt in the Canva design = ~93px on the 1920 canvas */
+
   font-size: clamp(34px, 4.8611vw, 120px);
   line-height: 1.4;
 }
@@ -236,18 +210,6 @@ body {
   line-height: 1.6;
 }
 
-/* ============================================================
-   ABOUT ME overlay (landing page)
-   Clicking About Me plays a three-step sequence, driven purely by
-   CSS transitions on body.about-open:
-     open:  buttons fade out (0-.35s) -> stage slides left
-            (.3-1.2s) -> text fades in (1.25-1.75s)
-     close: text fades out (0-.3s) -> stage slides back
-            (.25-1.15s) -> buttons fade in (1.15-1.5s)
-   The stage slides 376px of the 1920 canvas (19.5833%): the N of
-   NIRVAAN lands on the star cluster next to the planet (x~250-320)
-   and the car photo (x574-1347) stays fully on screen at x198-971.
-   ============================================================ */
 .stage {
   transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1) 0.25s;
 }
@@ -256,7 +218,6 @@ body.about-open .stage {
   transition-delay: 0.3s;
 }
 
-/* these three fade away while About Me is open (email + linkedin stay) */
 #btn-about,
 #btn-resume,
 #btn-wicd {
@@ -275,14 +236,13 @@ body.about-open #btn-wicd {
   position: absolute;
   top: 0;
   bottom: 0;
-  left: 51.5%;   /* the car photo's right edge sits at 50.57% once slid */
+  left: 51.5%;
   right: 2.75%;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
   border-left: 2px solid rgba(241, 237, 228, 0.45); /* the divider */
-  /* near-opaque page colour: dulls whatever slides underneath (the blue
-     ascii rock especially) so the text stays legible */
+
   background: rgba(22, 12, 15, 0.95);
   padding: 3vh 2vw;
   opacity: 0;
@@ -294,12 +254,9 @@ body.about-open .about-panel {
   visibility: visible;
   transition: opacity 0.5s ease 1.25s, visibility 0s linear 1.25s;
 }
-/* the panel is a sibling of .stage inside the flex main-container */
+
 .main-container:has(.stage) { position: relative; }
 
-/* the inner column is narrower than the panel and centred in it, so the
-   text sits tucked and even instead of stretching to the right edge;
-   margin:auto centring degrades to a normal scroll when text is tall */
 .about-inner {
   display: flex;
   flex-direction: column;
@@ -308,7 +265,7 @@ body.about-open .about-panel {
   margin: auto;
 }
 
-.about-close { /* same X as the WICD window, cropped from its title bar */
+.about-close {
   align-self: flex-end;
   flex: none;
   width: clamp(22px, 1.46vw, 34px);
@@ -322,7 +279,7 @@ body.about-open .about-panel {
 .about-close:focus-visible { filter: brightness(1.15); }
 
 .about-title {
-  margin: 0 0 4vh; /* a blank line or two before the text starts */
+  margin: 0 0 4vh;
   color: #ffffff;
   font-family: "Times New Roman", Times, serif;
   font-weight: 400;
@@ -338,8 +295,7 @@ body.about-open .about-panel {
   line-height: 1.55;
 }
 .about-copy p { margin: 0 0 0.9em; }
-/* the copy scrolls inside the panel when it outgrows the window, so the
-   title and X stay put; keep that scrollbar visible but understated */
+
 .about-copy { scrollbar-width: thin; scrollbar-color: rgba(241,237,228,0.35) transparent; }
 .about-copy::-webkit-scrollbar { width: 8px; }
 .about-copy::-webkit-scrollbar-track { background: transparent; }
@@ -349,7 +305,6 @@ body.about-open .about-panel {
 }
 .about-copy::-webkit-scrollbar-thumb:hover { background: rgba(241, 237, 228, 0.5); }
 
-/* respect a reduced-motion preference: show/hide with no slide or fade */
 @media (prefers-reduced-motion: reduce) {
   .stage, .about-panel, #btn-about, #btn-resume, #btn-wicd { transition: none !important; }
 }
@@ -359,19 +314,6 @@ body.about-open .about-panel {
   margin: 0 0 1em 1.2em;
 }
 
-/* ============================================================
-   SOCIAL MEDIA transition (landing page -> social-media.html)
-   Clicking the menu's Social Media button plays one 0.9s beat,
-   everything starting together:
-     - the artwork, the name and every button fade out (0.35s,
-       the same rate as the About Me fade)
-     - the planet slides off the left edge (0.9s, the same rate
-       and curve as the About Me slide)
-     - the stars do neither: they stay exactly where they are,
-       and the social page draws them at identical coordinates,
-       so the page swap underneath is invisible.
-   js/wicd.js navigates once the beat finishes.
-   ============================================================ */
 body.page-exit .stage-bg,
 body.page-exit #wicd-window,
 body.page-exit .hotspot,
@@ -379,8 +321,7 @@ body.page-exit #btn-about,
 body.page-exit #btn-resume,
 body.page-exit #btn-wicd {
   opacity: 0;
-  /* the ID-qualified selectors above exist to outrank the About Me
-     rules, which would otherwise hold these buttons at a 1.15s delay */
+
   transition: opacity 0.35s ease, visibility 0s linear 0.35s;
 }
 .layer-planet {
@@ -389,8 +330,7 @@ body.page-exit #btn-wicd {
 body.page-exit .layer-planet {
   transform: translateX(-130%);
 }
-/* Only the Social Media page needs this cluster gone: its title sits there.
-   The Marketing page draws the star, so it stays put on the way over. */
+
 body.page-exit.exit-social .layer-star-title {
   opacity: 0;
   transition: opacity 0.35s ease, visibility 0s linear 0.35s;

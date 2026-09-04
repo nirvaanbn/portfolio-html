@@ -1,6 +1,5 @@
 name: "nirvaan-nair-portfolio"
 output_dir: "docs"
-# Source material and tooling: kept in the repo, never published to docs/
 exclude: ["Pages for Portfolio", "README.md", "notes", "tools"]
 output:
   html_document:

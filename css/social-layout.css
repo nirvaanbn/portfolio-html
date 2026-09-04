@@ -5,15 +5,13 @@
    (centred on 960); box scale 1.0952x the mockup.
    ============================================================ */
 .social-stage {
-  /* --soc-scale shrinks the whole layout, stars excluded, so more lands in
-     the first screenful. Raise it for bigger videos, lower it to see more. */
+  /* scales the layout, stars excluded */
   --soc-scale: 1;
   position: relative;
   width: 100%;
   aspect-ratio: 1920 / calc(2558 * var(--soc-scale));
   margin: 0 auto;
-  /* the stars sit where they do on the landing page, which is what makes
-     the fade-out hand-off between the two pages invisible */
+  /* stars match the landing page, so the hand-off lines up */
   background: url("../assets/layer-stars.png") top left / 100% auto no-repeat #160c0f;
 }
 .social-canvas {
@@ -47,8 +45,6 @@
 .soc-note-espanol { left: 67.7579%; top: 10.3206%; }
 
 /* ---------- video frames ---------- */
-/* the white border belongs to the frame, so it survives once the poster
-   (and later the player) is inside it */
 .soc-frame {
   width: 100%; height: 100%;
   box-sizing: border-box;

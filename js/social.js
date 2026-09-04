@@ -1,6 +1,3 @@
-// Social Media page. The grid is a wall of poster images so every thumbnail
-// fills its white border exactly; clicking one plays it in a lightbox, which
-// is the only way a TikTok card gets the width it needs to render properly.
 document.addEventListener("DOMContentLoaded", function () {
   var box = document.getElementById("soc-lightbox");
   var media = document.getElementById("soc-lb-media");
@@ -11,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function clearPlayer() {
     Array.prototype.slice.call(media.querySelectorAll("iframe, video"))
-      .forEach(function (el) { el.remove(); });   // stops playback
+      .forEach(function (el) { el.remove(); });
   }
 
   function open(btn) {
@@ -39,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     lastFocus = btn;
     box.hidden = false;
-    // let the browser paint the hidden state first so the fade actually runs
+    // paint the hidden state first, or the fade has nothing to run from
     requestAnimationFrame(function () { box.classList.add("is-open"); });
     document.body.classList.add("soc-lb-open");
     closeBtn.focus();
@@ -53,7 +50,6 @@ document.addEventListener("DOMContentLoaded", function () {
     if (lastFocus) lastFocus.focus();
   }
 
-  // Local clips play right where they are, inside their white border.
   function playInline(btn) {
     var v = document.createElement("video");
     v.src = btn.getAttribute("data-src");
