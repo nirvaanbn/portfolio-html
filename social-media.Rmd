@@ -77,11 +77,11 @@ pagetitle: Social Media & Content Creation — Nirvaan Nair
   <div class="soc-frame">
     <button class="soc-play" type="button"
             data-kind="embed" data-src="https://www.tiktok.com/embed/v2/7529656863948836126" data-aspect="portrait"
-            aria-label="Play TikTok video, 4.3M views">
+            aria-label="Play TikTok video, 3.4M views">
       <img src="assets/social-poster-p2.jpg" alt="" loading="lazy">
     </button>
   </div>
-  <figcaption>4.3M views</figcaption>
+  <figcaption>3.4M views</figcaption>
 </figure>
 
 <figure class="soc-item soc-p3">
